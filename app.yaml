@@ -1,0 +1,77 @@
+application: myapp
+version: 1
+runtime: python
+api_version: 1
+
+default_expiration: "1d"
+
+builtins:
+- admin_redirect: on
+- appstats: on
+- datastore_admin: on
+- remote_api: on
+
+handlers:
+- url: /favicon.ico
+  static_files: statics/images/favicon.ico
+  upload: statics/images/favicon.ico
+  secure: never
+
+- url: /js
+  static_dir: statics/javascripts
+  secure: never
+
+- url: /css
+  static_dir: statics/stylesheets
+  secure: never
+
+- url: /ja
+  static_files: statics/html/index_ja.html
+  upload: statics/html/index_ja.html
+
+- url: /en
+  static_files: statics/html/index_en.html
+  upload: statics/html/index_en.html
+
+- url: /admin/.*
+  script: $PYTHON_LIB/google/appengine/ext/admin
+  secure: always
+  login: admin
+
+- url: /stats.*
+  script: $PYTHON_LIB/google/appengine/ext/appstats/ui.py
+  secure: always
+  login: admin
+
+- url: /remote_api
+  script: $PYTHON_LIB/google/appengine/ext/remote_api/handler.py
+  secure: always
+  login: admin
+
+- url: /test.*
+  script: gaeunit.py
+  login: admin
+
+- url: /api/.*
+  script: restful.py
+  secure: optional
+  login: required
+
+- url: /
+  script: main.py
+  secure: never
+
+skip_files: |
+ ^(.*/)?(
+ (#.*#)|
+ (.*/RCS/.*)|
+ (.*\.po[t]*)|
+ (.*\.py[co])|
+ (.*~)|
+ (\..*)|
+ (app\.ya*ml)|
+ (dev_appserver.datastore)|
+ (index\.ya*ml)|
+ (tmp/.*)|
+ (tests/.*)|
+ )$
