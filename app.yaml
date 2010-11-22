@@ -26,23 +26,13 @@ handlers:
   static_dir: statics/stylesheets
   secure: never
 
-- url: /ja
+- url: /ja/
   static_files: statics/html/index_ja.html
   upload: statics/html/index_ja.html
 
-- url: /en
+- url: /en/
   static_files: statics/html/index_en.html
   upload: statics/html/index_en.html
-
-- url: /admin/.*
-  script: $PYTHON_LIB/google/appengine/ext/admin
-  secure: always
-  login: admin
-
-- url: /stats.*
-  script: $PYTHON_LIB/google/appengine/ext/appstats/ui.py
-  secure: always
-  login: admin
 
 - url: /remote_api
   script: $PYTHON_LIB/google/appengine/ext/remote_api/handler.py
