@@ -43,12 +43,12 @@ handlers:
   script: gaeunit.py
   login: admin
 
-- url: /api/.*
-  script: restful.py
+- url: /_api/.*
+  script: api.py
   secure: optional
   login: required
 
-- url: /
+- url: /.*
   script: main.py
   secure: never
 
