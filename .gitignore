@@ -1,0 +1,11 @@
+## Directories. ##
+tmp/*
+
+## Any Files fixed by extension. ##
+*.pyc
+*.zip
+
+## Specifed Files. ##
+dev_appserver.datastore
+gaeunit.py
+index.yaml

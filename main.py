@@ -3,25 +3,8 @@
 import sys
 sys.path.insert(0, './distlib.zip')
 
-import re
-from itty import *
+from google.appengine.ext.webapp.util import run_wsgi_app
+from application import app
 
-target = re.compile(r'ja')
-
-
-@get('/')
-def accept_lang(request):
-    ja = str(request._environ.get('HTTP_ACCEPT_LANGUAGE'))
-
-    if target.match(ja):
-        raise Redirect('/ja/')
-    else:
-        raise Redirect('/en/')
-
-
-def index(request):
-    return 'Hello World!'
-
-
-run_itty(server='appengine')
+run_wsgi_app(app)
 
