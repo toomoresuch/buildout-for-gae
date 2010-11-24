@@ -3,21 +3,24 @@
 import sys
 sys.path.insert(0, '../distlib.zip')
 
+import root
 import gaeunit
 import unittest
-from main import index
 
 
-class Test(unittest.TestCase):
+class TestCase(unittest.TestCase):
+
+    def setUp(self):
+        self.app = root.app.test_client()
+
+    def tearDown(self):
+        pass
 
     def test(self):
-        res = index({})
-        self.assertEqual(res, 'Hello World!')
+        rv = self.app.get('/hello/')
+        assert 'Hello World!' in rv.data
 
 
 if __name__ == '__main__':
-
-    # import sys;sys.argv = ['', 'Test.testName']
-
     unittest.main()
 
