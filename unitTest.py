@@ -3,15 +3,15 @@
 import sys
 sys.path.insert(0, '../distlib.zip')
 
-import root
 import gaeunit
 import unittest
+import main
 
 
 class TestCase(unittest.TestCase):
 
     def setUp(self):
-        self.app = root.app.test_client()
+        self.app = main.app.test_client()
 
     def tearDown(self):
         pass
