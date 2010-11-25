@@ -1,7 +1,53 @@
 # -*- coding: utf-8 -*-
 
-from google.appengine.ext.webapp.util import run_wsgi_app
-from root import app
+import sys
+sys.path.insert(0, 'distlib.zip')
 
-run_wsgi_app(app)
+# -----------------------------------------------------------------------------
+#  IMPORTS.
+# -----------------------------------------------------------------------------
+
+import re
+
+from flask import Flask
+from flask import redirect
+from flask import request
+from google.appengine.ext.webapp.util import run_wsgi_app
+
+# -----------------------------------------------------------------------------
+#  CONFIGURATION.
+# -----------------------------------------------------------------------------
+
+app = Flask(__name__)
+
+# set the secret key.  keep this really secret:
+
+app.secret_key = 'the secret key'
+app.debug = True
+
+target = re.compile(r'ja')
+
+# -----------------------------------------------------------------------------
+#  METHODS.
+# -----------------------------------------------------------------------------
+
+
+@app.route('/')
+def accept_lang():
+    if target.match(str(request.accept_languages.best)):
+        return redirect('/ja/')
+    else:
+        return redirect('/en/')
+
+
+@app.route('/hello/')
+def index():
+    return 'Hello World!'
+
+# -----------------------------------------------------------------------------
+#  MAIN.
+# -----------------------------------------------------------------------------
+
+if __name__ == '__main__':
+    run_wsgi_app(app)
 
