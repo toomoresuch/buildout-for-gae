@@ -18,6 +18,14 @@ handlers:
   mime_type: image/x-icon
   secure: never
 
+- url: /_generated_media
+  static_dir: _generated_media
+  secure: never
+
+- url: /_media
+  static_dir: kay/media
+  secure: never
+
 - url: /js
   static_dir: statics/javascripts
   secure: never
@@ -34,39 +42,54 @@ handlers:
   static_files: statics/html/index_en.html
   upload: statics/html/index_en.html
 
+- url: /_kay/.*
+  script: kay/main.py
+  login: admin
+
 - url: /remote_api
   script: $PYTHON_LIB/google/appengine/ext/remote_api/handler.py
   secure: always
   login: admin
 
-- url: /test.*
-  script: gaeunit.py
+- url: /_ah/queue/deferred
+  script: kay/main.py
   login: admin
+
+- url: /_ah/test.*
+  script: kay/ext/testutils/gaeunit.py
+  login: admin
+
+- url: /.*
+  script: kay/main.py
+  secure: never
 
 - url: /_api/.*
   script: api.py
   secure: optional
   login: required
 
-- url: /.*
-  script: main.py
-  secure: never
-
 skip_files: |
   ^(.*/)?(
   (#.*#)|
-  (.*/RCS/.*)|
   (.*\.po[t]*)|
   (.*\.py[co])|
   (.*~)|
   (LICENSE)|
   (README)|
+  (README\.pdf)|
   (TODO)|
+  (TODO\.pdf)|
   (\..*)|
   (_backup/.*)|
   (app\.ya*ml)|
-  (cron\.ya*ml)|
+  (app\.yaml\.sample)|
+  (cron\.yaml\.sample)|
   (dev_appserver.datastore)|
+  (gaema-LICENSE)|
   (index\.ya*ml)|
-  (tmp/.*)|
+  (index\.yaml\.sample)|
+  (kay\/docs\/.*)|
+  (kay\/lib\/babel\/localedata\/.*)|
+  (kay\/management\/.*)|
+  (manage\.py)|
   )$
