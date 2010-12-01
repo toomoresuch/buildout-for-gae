@@ -1,11 +1,15 @@
 ## Directories. ##
 tmp/*
+.hg/*
 
 ## Any Files fixed by extension. ##
 *.pyc
 *.zip
 
 ## Specifed Files. ##
+.hgignore
+LICENSE
 dev_appserver.datastore
-gaeunit.py
 index.yaml
+kay
+manage.py

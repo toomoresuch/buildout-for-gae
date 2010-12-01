@@ -65,8 +65,8 @@ handlers:
 
 - url: /_api/.*
   script: api.py
-  secure: optional
-  login: required
+  secure: always
+  # login: required
 
 skip_files: |
   ^(.*/)?(
