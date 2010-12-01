@@ -1,14 +1,10 @@
 ## Directories. ##
 tmp/*
-.hg/*
 
 ## Any Files fixed by extension. ##
 *.pyc
-*.zip
 
 ## Specifed Files. ##
-.hgignore
-LICENSE
 dev_appserver.datastore
 index.yaml
 kay
