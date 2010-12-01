@@ -1,26 +1,31 @@
 # -*- coding: utf-8 -*-
 
-import sys
-sys.path.insert(0, '../distlib.zip')
+from google.appengine.ext import db
+from kay.app import get_application
+from kay.ext.testutils.gae_test_base import GAETestBase
+from werkzeug import BaseResponse, Client, Request
 
-import gaeunit
 import unittest
-import main
 
 
 class TestCase(unittest.TestCase):
 
+    # USE_PRODUCTION_STUBS = True
+    # USE_REMOTE_STUBS = True
+
+    CLEANUP_USED_KIND = True
+
     def setUp(self):
-        self.app = main.app.test_client()
+
+        app = get_application()
+        self.client = Client(app, BaseResponse)
 
     def tearDown(self):
         pass
 
     def test(self):
-        rv = self.app.get('/hello/')
-        assert 'Hello World!' in rv.data
+        response = self.client.get('/')
+        assert response.status_code is 200
 
 
-if __name__ == '__main__':
-    unittest.main()
 
