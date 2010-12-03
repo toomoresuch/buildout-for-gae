@@ -34,21 +34,13 @@ handlers:
   static_dir: statics/stylesheets
   secure: never
 
-- url: /ja/
-  static_files: statics/html/index_ja.html
-  upload: statics/html/index_ja.html
-
-- url: /en/
-  static_files: statics/html/index_en.html
-  upload: statics/html/index_en.html
-
-- url: /_kay/.*
-  script: kay/main.py
-  login: admin
-
 - url: /remote_api
   script: $PYTHON_LIB/google/appengine/ext/remote_api/handler.py
   secure: always
+  login: admin
+
+- url: /_kay/.*
+  script: kay/main.py
   login: admin
 
 - url: /_ah/queue/deferred
@@ -63,10 +55,10 @@ handlers:
   script: kay/main.py
   secure: never
 
-- url: /_api/.*
-  script: api.py
+- url: /api/.*
+  script: kay/main.py
   secure: always
-  # login: required
+  login: required
 
 skip_files: |
   ^(.*/)?(
