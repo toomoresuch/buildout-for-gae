@@ -26,9 +26,7 @@ COOKIE_AGE = 86400  # 1day
 COOKIE_NAME = 'KAY_SESSION'
 
 # SESSION_MEMCACHE_AGE = 360
-
-SESSION_STORE = kay.sessions.sessionstore.SecureCookieSessionStore
-
+# SESSION_STORE = kay.sessions.sessionstore.SecureCookieSessionStore
 # kay.sessions.sessionstore.GAESessionStore
 
 # LANG_COOKIE_AGE = COOKIE_AGE
