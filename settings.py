@@ -56,9 +56,9 @@ ADMINS = ('hoge', 'fuga@example.com')
 # USE_I18N = True
 # DEFAULT_LANG = 'en'
 
-INSTALLED_APPS = ('root', 'api')
+INSTALLED_APPS = ()
 
-APP_MOUNT_POINTS = {'root': '/'}
+APP_MOUNT_POINTS = {}
 
 # You can remove following settings if unnecessary.
 
