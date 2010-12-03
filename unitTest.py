@@ -8,7 +8,7 @@ from werkzeug import BaseResponse, Client, Request
 import unittest
 
 
-class TestCase(unittest.TestCase):
+class TestCase(GAETestBase):
 
     # USE_PRODUCTION_STUBS = True
     # USE_REMOTE_STUBS = True
