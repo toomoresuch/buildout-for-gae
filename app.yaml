@@ -3,6 +3,9 @@ version: 1
 runtime: python
 api_version: 1
 
+derived_file_type:
+- python_precompiled
+
 default_expiration: "1d"
 
 builtins:
@@ -13,17 +16,14 @@ builtins:
 
 handlers:
 - url: /favicon.ico
-  static_files: statics/images/favicon.ico
-  upload: statics/images/favicon.ico
+  static_files: statics/favicon.ico
+  upload: statics/favicon.ico
   mime_type: image/x-icon
   secure: never
 
-- url: /_generated_media
-  static_dir: _generated_media
-  secure: never
-
-- url: /_media
-  static_dir: kay/media
+- url: /robots.txt
+  static_files: statics/robots.txt
+  upload: statics/robots.txt
   secure: never
 
 - url: /js
@@ -34,31 +34,31 @@ handlers:
   static_dir: statics/stylesheets
   secure: never
 
+- url: /statics
+  static_dir: statics
+  secure: never
+
 - url: /remote_api
   script: $PYTHON_LIB/google/appengine/ext/remote_api/handler.py
   secure: always
   login: admin
 
-- url: /_kay/.*
-  script: kay/main.py
-  login: admin
-
 - url: /_ah/queue/deferred
-  script: kay/main.py
+  script: main.py
   login: admin
 
 - url: /_ah/test.*
-  script: kay/ext/testutils/gaeunit.py
+  script: gaeunit.py
   login: admin
 
-- url: /.*
-  script: kay/main.py
-  secure: never
-
-- url: /api/.*
-  script: kay/main.py
+- url: /_api/.*
+  script: main.py
   secure: always
   login: required
+
+- url: /.*
+  script: main.py
+  secure: never
 
 skip_files: |
   ^(.*/)?(
@@ -66,9 +66,12 @@ skip_files: |
   (.*\.po[t]*)|
   (.*\.py[co])|
   (.*~)|
+  (\.git/.*)|
+  (\.gitignore)|
   (LICENSE)|
   (README)|
   (README\.pdf)|
+  (README\.txt)|
   (TODO)|
   (TODO\.pdf)|
   (\..*)|
@@ -76,12 +79,8 @@ skip_files: |
   (app\.ya*ml)|
   (app\.yaml\.sample)|
   (cron\.yaml\.sample)|
-  (dev_appserver.datastore)|
+  (distlib/babel\/localedata\/.*)|
   (gaema-LICENSE)|
   (index\.ya*ml)|
   (index\.yaml\.sample)|
-  (kay\/docs\/.*)|
-  (kay\/lib\/babel\/localedata\/.*)|
-  (kay\/management\/.*)|
-  (manage\.py)|
   )$
