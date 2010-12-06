@@ -26,7 +26,7 @@ class TestCase(gae_test_base.GAETestBase):
 
     def test(self):
         response = self.client.get('/')
-        self.assertEqual(res.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data, 'Hello, World!')
 
 

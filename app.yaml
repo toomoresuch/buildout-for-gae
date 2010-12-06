@@ -47,7 +47,7 @@ handlers:
   script: main.py
   login: admin
 
-- url: /_ah/test.*
+- url: /test.*
   script: gaeunit.py
   login: admin
 
