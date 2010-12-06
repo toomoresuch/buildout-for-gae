@@ -6,8 +6,6 @@ from apps.hello_world.handlers import HelloWorldHandler
 import gae_test_base
 import unittest
 
-gae_test_base.APP_ID = default_config['app_id']
-
 
 class TestCase(gae_test_base.GAETestBase):
 
@@ -20,6 +18,7 @@ class TestCase(gae_test_base.GAETestBase):
         app = Tipfy(rules=[Rule('/', endpoint='home',
                     handler=HelloWorldHandler)])
         self.client = app.get_test_client()
+        gae_test_base.APP_ID = default_config['app_id']
 
     def tearDown(self):
         pass
